@@ -1,0 +1,97 @@
+﻿@model Technical_Test_Project.Data.Product
+
+@{
+    ViewData["Title"] = "Product Details";
+}
+<style>
+
+    .button_group {
+        width: 100%;
+        display: flex;
+    }
+
+    button {
+        font-family: 'Oswald', sans-serif;
+        font-size: 1em;
+        font-weight: 300;
+        border: 0;
+        padding: 1em 2em;
+        margin: 0.5em 0;
+        width: 100%;
+        background: rgba(0,0,0,0.1);
+        -webkit-transition: .2s;
+    }
+
+        button:nth-child(2) {
+            margin: 0.5em;
+        }
+
+        button:hover {
+            background: rgba(0,0,0,0.3);
+        }
+
+        button:active {
+            background: rgba(0,0,0,0.5);
+        }
+
+    #add:active {
+        -webkit-transform: translateY(-1em);
+    }
+
+    #subtract:active {
+        -webkit-transform: translateY(1em);
+    }
+
+    #counter {
+        font-size: 3em;
+        text-align: center;
+        background: rgba(0,0,0,0.1);
+    }
+</style>
+<h1>Details</h1>
+<div class="container">
+    <div class="card offset-3" style="width: 18rem;">
+        <img class="img-thumbnail" src=@Url.Content(Model.PictureUrl) alt=@Model.Name />
+        <form asp-action="addToCart">
+
+
+            <div class="card-body">
+
+                <input asp-for="ID" hidden />
+                <h5 class="card-title"> @Model.Name</h5>
+                <p class="card-text">@Model.Description</p>
+
+
+            </div>
+            <div class="card-footer">
+                <div id="counter"></div>
+                    <div class="button_group">
+                        <button type="button" id="subtract">- 1</button>
+                        <button type="button" id="add">+ 1</button>
+                    </div>
+                
+                <div>
+                    <button id="btnSave" class="btn btn-primary btn-block">Add To Cart</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+</div>
+<script>
+    var counter = 0
+    $("#counter").text(counter);
+    $("#add").click(function () {
+        counter = counter + 1;
+        $("#counter").text(counter);
+    });
+
+    $("#subtract").click(function () {
+        if (counter > 0) {
+            counter = counter - 1;
+        }
+        $("#counter").text(counter);
+    });
+
+</script>

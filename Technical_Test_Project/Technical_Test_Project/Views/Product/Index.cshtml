@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Technical_Test_Project.Data.Product>
+
+@{
+    ViewBag.Title = "Products";
+}
+<div><b>Product</b><br /></div>
+<table class="table    table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(x => x.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => x.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => x.UnitPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => x.CurrentQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => x.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(x => x.PictureUrl)
+        </th>
+        <th>
+            Add To Cart
+        </th>
+
+    </tr>
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>@product.ID</td>
+            <td>@product.Name</td>
+            <td>@product.UnitPrice</td>
+            <td>@product.CurrentQuantity</td>
+            <td>@product.Description</td>
+            <td><img src=@Url.Content(product.PictureUrl) alt=@product.Name height="75" width="75" /></td>
+            <td class="text-center">
+
+                @Html.ActionLink("Add To Cart", "Index", "Cart", new { productId = product.ID })
+
+            </td>
+
+        </tr>
+
+    }
+</table>
